@@ -13,9 +13,8 @@ class FormController extends Controller
 
     public function welcome(Request $request)
     {
-        $firstName = $request->input('first_name');
-        $lastName = $request->input('last_name');
-
-        return view('welcome', compact('firstName', 'lastName'));
+        $firstname = $request->input('firstname');
+        $lastname = $request->input('lastname');
+        return view('welcome', compact('firstname', 'lastname'));
     }
 }
