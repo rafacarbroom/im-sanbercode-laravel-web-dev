@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('summary');
             $table->string('image');
+            $table->Integer('stock');
             $table->unsignedBigInteger('category_id');
 
             $table->foreign('category_id')->references('id')->on('categories');
