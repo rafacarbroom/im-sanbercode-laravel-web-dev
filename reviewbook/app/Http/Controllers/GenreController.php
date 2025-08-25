@@ -1,65 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+use App\Http\Controllers\GenreController;
 
-use App\Models\Genre;
-use Illuminate\Http\Request;
-
-class GenreController extends Controller
-{
-    public function index()
-    {
-        $genres = Genre::all();
-        return view('genres.index', compact('genres'));
-    }
-
-    public function create()
-    {
-        return view('genres.create');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'nullable',
-        ]);
-
-        Genre::create($request->all());
-
-        return redirect()->route('genres.index')->with('success', 'Genre berhasil ditambahkan.');
-    }
-
-    public function show($id)
-    {
-        $genre = Genre::findOrFail($id);
-        return view('genres.show', compact('genre'));
-    }
-
-    public function edit($id)
-    {
-        $genre = Genre::findOrFail($id);
-        return view('genres.edit', compact('genre'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required|max:255',
-            'description' => 'nullable',
-        ]);
-
-        $genre = Genre::findOrFail($id);
-        $genre->update($request->all());
-
-        return redirect()->route('genres.index')->with('success', 'Genre berhasil diupdate.');
-    }
-
-    public function destroy($id)
-    {
-        $genre = Genre::findOrFail($id);
-        $genre->delete();
-
-        return redirect()->route('genres.index')->with('success', 'Genre berhasil dihapus.');
-    }
-}
+Route::get('/genre', [GenreController::class, 'index'])->name('genre.index');
+Route::get('/genre/create', [GenreController::class, 'create'])->name('genre.create');
+Route::post('/genre', [GenreController::class, 'store'])->name('genre.store');
+Route::get('/genre/{id}', [GenreController::class, 'show'])->name('genre.show');
+Route::get('/genre/{id}/edit', [GenreController::class, 'edit'])->name('genre.edit');
+Route::put('/genre/{id}', [GenreController::class, 'update'])->name('genre.update');
+Route::delete('/genre/{id}', [GenreController::class, 'destroy'])->name('genre.destroy');

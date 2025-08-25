@@ -1,5 +1,5 @@
 <?php
 
-use App\Http\Controllers\GenreController;
+use App\Http\Controllers\GameController;
 
-Route::resource('genres', GenreController::class);
+Route::resource('games', GameController::class);
